@@ -16,11 +16,11 @@
 #include "esp_err.h"
 #include "esp_log.h"
 #include "lvgl.h"
-#include "esp_lcd_panel_io_qspi.h"
+#include "esp_lcd_panel_io.h"
+#include "esp_lcd_panel_vendor.h"
 
-#if CONFIG_EXAMPLE_LCD_CONTROLLER_ST7789
-//#include "esp_lcd_st7789.h"
-#elif CONFIG_EXAMPLE_LCD_CONTROLLER_GC9B71
+
+#if CONFIG_EXAMPLE_LCD_CONTROLLER_GC9B71
 #include "esp_lcd_panel_gc9b71.h"
 #endif
 
@@ -50,13 +50,16 @@ static const char *TAG = "example";
 #define EXAMPLE_LCD_PIXEL_CLOCK_HZ     (20 * 1000 * 1000)
 #define EXAMPLE_LCD_BK_LIGHT_ON_LEVEL  1
 #define EXAMPLE_LCD_BK_LIGHT_OFF_LEVEL !EXAMPLE_LCD_BK_LIGHT_ON_LEVEL
-#define EXAMPLE_PIN_NUM_SCLK           14
 #if CONFIG_EXAMPLE_LCD_CONTROLLER_ST7789
-#define EXAMPLE_PIN_NUM_MOSI           21
+#define EXAMPLE_PIN_NUM_SCLK          47 // 14
+
+#define EXAMPLE_PIN_NUM_MOSI           48 //21
 	//#define EXAMPLE_PIN_NUM_MISO			 -1
-#define EXAMPLE_PIN_NUM_LCD_DC         12
+#define EXAMPLE_PIN_NUM_LCD_DC         34//12
 
 #elif CONFIG_EXAMPLE_LCD_CONTROLLER_GC9B71
+#define EXAMPLE_PIN_NUM_SCLK           14
+
 #define EXAMPLE_PIN_NUM_D0           21
 #define EXAMPLE_PIN_NUM_D1           12
 #define EXAMPLE_PIN_NUM_D2           19
@@ -64,12 +67,12 @@ static const char *TAG = "example";
 
 #endif
 
-#define EXAMPLE_PIN_NUM_LCD_RST        13
-#define EXAMPLE_PIN_NUM_LCD_CS         9
-#define EXAMPLE_PIN_NUM_BK_LIGHT       46
+#define EXAMPLE_PIN_NUM_LCD_RST      33 //  13
+#define EXAMPLE_PIN_NUM_LCD_CS       35 // 9
+#define EXAMPLE_PIN_NUM_BK_LIGHT     37  //46
 
-#define EXAMPLE_PIN_NUM_TP_RST         10
-#define EXAMPLE_PIN_NUM_TP_INT         11
+#define EXAMPLE_PIN_NUM_TP_RST        36 // 10
+#define EXAMPLE_PIN_NUM_TP_INT        17 // 11
 
 
 // The pixel number in horizontal and vertical
